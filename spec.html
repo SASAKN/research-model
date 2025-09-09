@@ -1,0 +1,711 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>高校探究 - Structure of Model</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="219e9b3f-b7de-8051-9a77-cc24118d06f3" class="page sans"><header><h1 class="page-title">高校探究 - Structure of Model</h1><p class="page-description"></p></header><div class="page-body"><p id="250e9b3f-b7de-803c-b850-cd28f6c7204b" class="">
+</p><h1 id="250e9b3f-b7de-8051-a77c-edeb66826eb6" class="">Autonomous Reasoning Agent</h1><h1 id="219e9b3f-b7de-803a-aa26-ee4db4d5dda9" class="">Model Structure　</h1><h3 id="24ee9b3f-b7de-8028-aaad-ea3ab175f4ee" class="">新推論モデルの全体像</h3><p id="24ee9b3f-b7de-80a4-8350-f0aaf58f54bf" class="">あなたのモデルは、Gemmaを「推論エンジン」ではなく「創造的な助手」として使い、その出力を厳密なスクリプトで制御・検証する階層的な構造になっています。このモデルは、思考プロセスを以下の主要なステップに分割し、それぞれを専門のモジュールが担当します。</p><ol type="1" id="24ee9b3f-b7de-806c-bd24-f094cc45367c" class="numbered-list" start="1"><li><strong>Planning (計画)</strong><ul id="24ee9b3f-b7de-8066-8ceb-e91a961a74dd" class="bulleted-list"><li style="list-style-type:disc"><strong>担当</strong>: Gemma</li></ul><ul id="24ee9b3f-b7de-80aa-a5f5-c04c9f3d640c" class="bulleted-list"><li style="list-style-type:disc"><strong>役割</strong>: 推論の目的と計画をJSON形式で生成する。</li></ul></li></ol><ol type="1" id="24ee9b3f-b7de-80d3-8aa2-cdba4f4beaf5" class="numbered-list" start="2"><li><strong>Explaining (説明・自己修復)</strong><ul id="24ee9b3f-b7de-80cb-9b75-f832ee225cb6" class="bulleted-list"><li style="list-style-type:disc"><strong>担当</strong>: Gemma</li></ul><ul id="24ee9b3f-b7de-80fd-a694-e990d1dd82fe" class="bulleted-list"><li style="list-style-type:disc"><strong>役割</strong>: 計画の穴を見つけ、自己修復する。根拠や理由も生成し、ユーザーへの説明に使う。</li></ul></li></ol><ol type="1" id="24fe9b3f-b7de-8095-8635-f70d0eb17715" class="numbered-list" start="3"><li><strong>Generalization (一般化)</strong><ul id="24fe9b3f-b7de-80ef-9253-fb68c3449d02" class="bulleted-list"><li style="list-style-type:disc">担当 : スクリプト,Gemma</li></ul><ul id="24fe9b3f-b7de-8003-9ee8-c0adeaebf482" class="bulleted-list"><li style="list-style-type:disc">役割 : この推論プロセスに関係のある知識や構造を検索し、一般化した知識として取り入れ、推論プロセスの関数として保存する。</li></ul></li></ol><ol type="1" id="24ee9b3f-b7de-8081-bb06-d3504bd56871" class="numbered-list" start="4"><li><strong>Making a structure (構造化)</strong><ul id="24ee9b3f-b7de-809f-b5b9-e2596b4aa02d" class="bulleted-list"><li style="list-style-type:disc"><strong>担当</strong>: Gemma</li></ul><ul id="24ee9b3f-b7de-80a7-b8be-cff6097fe633" class="bulleted-list"><li style="list-style-type:disc"><strong>役割</strong>: 推論に必要な因果関係、仮説,データ構造,意図,目的,意味などをすべて作成する。</li></ul></li></ol><ol type="1" id="24ee9b3f-b7de-800f-a94a-f783e23b7122" class="numbered-list" start="5"><li><strong>Translating a structure (記号化)</strong><ul id="24ee9b3f-b7de-8005-a47d-c1e49acb885d" class="bulleted-list"><li style="list-style-type:disc"><strong>担当</strong>: 自前スクリプト</li></ul><ul id="24ee9b3f-b7de-80cf-9127-ca2c92a2cb2c" class="bulleted-list"><li style="list-style-type:disc"><strong>役割</strong>: ステップ1と3の出力を、独自の中間記号推論記述言語に変換する。</li></ul></li></ol><ol type="1" id="24ee9b3f-b7de-80e2-a872-c9f39d408ddc" class="numbered-list" start="6"><li><strong>Pattern Matching (パターン照合)</strong><ul id="24ee9b3f-b7de-80bc-ac62-eac104b23232" class="bulleted-list"><li style="list-style-type:disc"><strong>担当</strong>: 自前スクリプト</li></ul><ul id="24ee9b3f-b7de-807a-ba6b-fdf445f3098d" class="bulleted-list"><li style="list-style-type:disc"><strong>役割</strong>: 過去に解決した問題と類似のパターンを検知し、素早い解決を図る。</li></ul></li></ol><ol type="1" id="24ee9b3f-b7de-8028-889b-dd5764c0b52b" class="numbered-list" start="7"><li><strong>Reasoning (推論)</strong><ul id="24ee9b3f-b7de-801f-a35f-c0e01fd9153c" class="bulleted-list"><li style="list-style-type:disc"><strong>担当</strong>: 自前スクリプト、Gemma、外部ツール（Function Calling）</li></ul><ul id="24ee9b3f-b7de-809b-b1c4-e00f40ba868a" class="bulleted-list"><li style="list-style-type:disc"><strong>役割</strong>: 計画と構造に従ってプログラムを実行し、根拠や因果を検証する。RAGやローカル検索機能もこの段階で利用する。</li></ul></li></ol><ol type="1" id="24ee9b3f-b7de-806e-b971-ed097f7c04b0" class="numbered-list" start="8"><li><strong>Reflecting &amp; Learning (内省・学習)</strong><ul id="24ee9b3f-b7de-80f9-be2c-efca3b362d15" class="bulleted-list"><li style="list-style-type:disc"><strong>担当</strong>: Gemma、自前スクリプト</li></ul><ul id="24ee9b3f-b7de-8043-a9a2-c9950550dd56" class="bulleted-list"><li style="list-style-type:disc"><strong>役割</strong>:<ul id="24ee9b3f-b7de-801a-bea3-fb702c2d27f8" class="bulleted-list"><li style="list-style-type:circle"><strong>Reflecting</strong>: 推論プロセス全体に矛盾がないか検証し、問題があればリトライする。Gemmaに自己反論もさせる。</li></ul><ul id="24ee9b3f-b7de-8041-90ad-f43dcd7cb42f" class="bulleted-list"><li style="list-style-type:circle"><strong>Rating</strong>: 推論プロセス全体の信頼性を評価する。</li></ul><ul id="24fe9b3f-b7de-80fc-8306-e8c8949c2bf5" class="bulleted-list"><li style="list-style-type:circle"><strong>Improving: </strong>Rating,Reflectingで得られた情報またこの推論プロセスで検索した情報や失敗例から得たノウハウをKnowledge Baseに保存する</li></ul><ul id="24ee9b3f-b7de-8017-876d-f820bf99bcb9" class="bulleted-list"><li style="list-style-type:circle"><strong>Knowledge Base</strong>: 得られた新しい知識や構造をデータベースに保存し、今後の推論に再利用する。</li></ul></li></ul></li></ol><h2 id="24fe9b3f-b7de-80c2-96c4-c2c7feaf4415" class="">The specification of my language</h2><h3 id="24fe9b3f-b7de-80f4-9adb-c7906f84697d" class="">命題論理</h3><h3 id="24fe9b3f-b7de-80cb-adbc-de209e9d3405" class="">論理演算子</h3><table id="24fe9b3f-b7de-8091-81a9-e34a8aa5bddb" class="simple-table"><tbody><tr id="24fe9b3f-b7de-80c8-9dd7-ebd6d992baef"><td id="S;Pp" class="">Symbol</td><td id="tGOe" class="">English</td><td id="p\ZE" class="">Meaning</td><td id=";fBF" class="">Example</td></tr><tr id="24fe9b3f-b7de-80f6-a014-c9fe4c746e62"><td id="S;Pp" class="">∧</td><td id="tGOe" class="">and</td><td id="p\ZE" class="">両方の命題が真の場合は真</td><td id=";fBF" class="">P∧Q</td></tr><tr id="24fe9b3f-b7de-800d-84a6-d7a84ed497c8"><td id="S;Pp" class="">∨</td><td id="tGOe" class="">or</td><td id="p\ZE" class="">少なくとも一つの命題が真の場合は真</td><td id=";fBF" class="">P∨Q</td></tr><tr id="24fe9b3f-b7de-802e-b325-ea0abf1e1d26"><td id="S;Pp" class="">¬</td><td id="tGOe" class="">not</td><td id="p\ZE" class="">命題の真偽を反転させる</td><td id=";fBF" class="">¬P</td></tr><tr id="24fe9b3f-b7de-8098-95b2-e6da9e26c0ce"><td id="S;Pp" class="">→</td><td id="tGOe" class="">implies</td><td id="p\ZE" class="">前提が真で結論が偽の場合のみ偽</td><td id=";fBF" class="">P→Q</td></tr><tr id="24fe9b3f-b7de-808b-8e78-f5fc2bfaa25d"><td id="S;Pp" class="">↔</td><td id="tGOe" class="">if and only if</td><td id="p\ZE" class="">両方の命題の真偽が一致する場合に真</td><td id=";fBF" class="">P↔Q</td></tr></tbody></table><h3 id="24fe9b3f-b7de-80b2-9411-c5f46a8dc117" class="">量化子</h3><table id="24fe9b3f-b7de-80ff-8aa3-cb1166150712" class="simple-table"><tbody><tr id="24fe9b3f-b7de-806c-aaee-c7a3b900c6e8"><td id=";rlJ" class="">Symbol</td><td id="Un|b" class="">English</td><td id="bt_k" class="">Meaning</td><td id="iNs^" class="">Example</td></tr><tr id="24fe9b3f-b7de-80ea-86e9-c74782010881"><td id=";rlJ" class="">∀</td><td id="Un|b" class="">forall</td><td id="bt_k" class="">集合内のすべての要素に適用される</td><td id="iNs^" class="">∀x,P(x)</td></tr><tr id="24fe9b3f-b7de-80df-b55a-d29edb84f630"><td id=";rlJ" class="">∃</td><td id="Un|b" class="">exists</td><td id="bt_k" class="">少なくとも1つの要素に適用される</td><td id="iNs^" class="">∃x,P(x)</td></tr></tbody></table><h3 id="24fe9b3f-b7de-808f-90c5-c649bd64ea15" class="">その他</h3><table id="24fe9b3f-b7de-80ad-b066-c25f413264b2" class="simple-table"><tbody><tr id="24fe9b3f-b7de-805f-948b-fb03de11cb6d"><td id="YcdO" class="">Symbol</td><td id="b~tv" class="">Meaning</td><td id=";X&lt;z" class="">Example</td></tr><tr id="24fe9b3f-b7de-802d-b6e9-daeafe3cf7e0"><td id="YcdO" class="">P,Q,R</td><td id="b~tv" class="">命題変数</td><td id=";X&lt;z" class="">任意の命題を表す</td></tr><tr id="24fe9b3f-b7de-80f7-b957-e5b427666b57"><td id="YcdO" class="">x,y,z</td><td id="b~tv" class="">変数</td><td id=";X&lt;z" class="">集合の要素を表す</td></tr><tr id="24fe9b3f-b7de-8054-ac83-e72844672853"><td id="YcdO" class="">=</td><td id="b~tv" class="">等号</td><td id=";X&lt;z" class="">2つの項が等しいことを示す</td></tr><tr id="24fe9b3f-b7de-8058-ade3-e5973273ba5f"><td id="YcdO" class="">⊢</td><td id="b~tv" class="">導出可能性 (entails)</td><td id=";X&lt;z" class="">左の命題から右の命題が導出できることを示す</td></tr><tr id="24fe9b3f-b7de-8017-a806-f7fcad5cfb18"><td id="YcdO" class="">≡</td><td id="b~tv" class="">論理的同値 (equivalent to)</td><td id=";X&lt;z" class="">2つの命題が常に同じ真偽値を持つことを示す</td></tr></tbody></table><h3 id="24fe9b3f-b7de-80ea-b01a-c55bd90d5d8b" class="">述語論理</h3><p id="24fe9b3f-b7de-80f3-9c82-c672f8324f87" class="">Objectであるxが性質Pを持つ時、P(x)<br/>Objectであるx,yの間には関係Rが成り立つことR(x,y)</p><h3 id="24fe9b3f-b7de-80f7-873b-d23890af2ddb" class="">時制</h3><ul id="24fe9b3f-b7de-8007-ad3e-c2b7199b005a" class="bulleted-list"><li style="list-style-type:disc">Now(x) 今起きることx</li></ul><ul id="24fe9b3f-b7de-8097-a6d7-f009807d7ef2" class="bulleted-list"><li style="list-style-type:disc">Future(x) 将来のある時点で起こることx</li></ul><ul id="24fe9b3f-b7de-8003-b823-ce1aaa319e01" class="bulleted-list"><li style="list-style-type:disc">Past(x) 過去のある時点で起きたことx</li></ul><ul id="24fe9b3f-b7de-80dc-a139-d45d663c916d" class="bulleted-list"><li style="list-style-type:disc">Global(x) xの後、常に起こるx</li></ul><ul id="24fe9b3f-b7de-8089-a4bd-d5edfb0dc54e" class="bulleted-list"><li style="list-style-type:disc">All(x)全ての時制でおこりうるx</li></ul><h3 id="24fe9b3f-b7de-8063-a640-e035d7f842c7" class="">確率</h3><ul id="24fe9b3f-b7de-8025-bfa1-e7e8295ad0a1" class="bulleted-list"><li style="list-style-type:disc">◇(x)　xである可能性がある</li></ul><ul id="250e9b3f-b7de-80e4-9e1b-c7aaf61201ce" class="bulleted-list"><li style="list-style-type:disc">□(x) xであることが必然である</li></ul><ul id="250e9b3f-b7de-8025-8f1d-c585707c5222" class="bulleted-list"><li style="list-style-type:disc">Fact(x) xは必ず事実である</li></ul><ul id="250e9b3f-b7de-8002-a57b-f7e76852bb41" class="bulleted-list"><li style="list-style-type:disc">Lie(x) xは全く嘘である</li></ul><ul id="250e9b3f-b7de-8083-b8d5-e78394ae981d" class="bulleted-list"><li style="list-style-type:disc">Hypo(x) xは証明されていない仮説である</li></ul><ul id="250e9b3f-b7de-80cb-8dca-db7d703e6404" class="bulleted-list"><li style="list-style-type:disc">Conf(x, v) ものxは信頼度vである</li></ul><h3 id="250e9b3f-b7de-80ec-9cb4-fdbe8b3e1cfa" class="">知識の宣言</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="250e9b3f-b7de-8088-b54c-cf15bbb6cef7" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">knowledge_json(&quot;base.json&quot;);</code></pre><h3 id="250e9b3f-b7de-80d6-8f59-e7b4675ee1cc" class="">変数宣言</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="250e9b3f-b7de-802a-97c0-c69d29be24ba" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"># 集合の要素を宣言
+A = {a1, a2, a3, ...};
+
+# 命題の宣言
+Prop(A) = is_a_even_number(n^2);
+Prop(B) = is_a_even_number(n);
+
+# 推論目標の宣言
+Goal(G) = Implies(A, B); # AならばBであること
+Goal(G) = Implies(is_a_even_number(n^2), is_a_even_number(n));
+
+# グローバル変数の宣言
+number a = 1;
+text b = &quot;hello&quot;;
+
+# 知識の宣言
+knowledge_json(&quot;base.json&quot;);</code></pre><h3 id="250e9b3f-b7de-80ff-890d-d7458900457e" class="">推論プロセス宣言</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="250e9b3f-b7de-8070-9e24-ef316ec563a9" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"># Plan
+
+## Step 1 : Action 1
+# Action 1 を記号論理で定義する
+
+## Step 2 : Action 2
+# Action 2 を記号論理で定義する
+
+## Step 3 : Action 3
+# Action 3 を記号論理で定義する
+# ......
+
+## Output Format 
+# Output Formatを決まった形で定義する</code></pre><table id="250e9b3f-b7de-80c7-aa8c-d33c62df7cd2" class="simple-table"><tbody><tr id="250e9b3f-b7de-8053-9520-f46029b303db"><td id="alV]" class="" style="width:244px">Function</td><td id="&lt;?sp" class="" style="width:283px">Meaning</td></tr><tr id="250e9b3f-b7de-8037-a5b4-c6ba4945afc3"><td id="alV]" class="" style="width:244px">Run(”&lt;Command&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Command&gt;をシステムで実行する</td></tr><tr id="250e9b3f-b7de-8020-b35d-fc9b96d3e776"><td id="alV]" class="" style="width:244px">Calc(”&lt;Equation&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Equation&gt;を計算する</td></tr><tr id="250e9b3f-b7de-809f-b0bd-d7cba1d3a38e"><td id="alV]" class="" style="width:244px">Think(”&lt;English&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;English&gt;を自然言語モデルで考える</td></tr><tr id="250e9b3f-b7de-8089-bc72-e4c8797c8cbf"><td id="alV]" class="" style="width:244px">Search(”&lt;Query&gt;”, “&lt;Source&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Source&gt; : Google, Knowledge Baseから&lt;Query&gt;を検索する</td></tr><tr id="250e9b3f-b7de-80c5-829d-c14f56eb2d9b"><td id="alV]" class="" style="width:244px">Verify(”&lt;Fact&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Fact&gt;が事実かを確認する</td></tr><tr id="250e9b3f-b7de-8015-8bad-d548b925c386"><td id="alV]" class="" style="width:244px">Analyze(”&lt;Data&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Data&gt;から分析をする</td></tr><tr id="250e9b3f-b7de-801e-b61b-e7e4e08c1727"><td id="alV]" class="" style="width:244px">Translate(”&lt;Text&gt;”, “&lt;Source Language&gt;”, “&lt;Target Language&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Text&gt;を&lt;Source Language&gt;から&lt;Target Language&gt;へ翻訳する</td></tr><tr id="250e9b3f-b7de-8017-b9ce-d1b003c3ea8e"><td id="alV]" class="" style="width:244px">Program(”&lt;English&gt;”, “&lt;Program Language&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;English&gt;を実行するためにプログラムを&lt;Program Language&gt;でかく。</td></tr><tr id="250e9b3f-b7de-80d2-a3ea-c8e590bfda00"><td id="alV]" class="" style="width:244px">Plan(&lt;Goal&gt;)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Goal&gt;を達成するためのプランを生成する</td></tr><tr id="250e9b3f-b7de-8096-885d-d32ffc886445"><td id="alV]" class="" style="width:244px">Prolog(”&lt;Input&gt;”)</td><td id="&lt;?sp" class="" style="width:283px">&lt;Input&gt;をPrologに変換して、Prologで実行する</td></tr></tbody></table><p id="250e9b3f-b7de-80ba-8578-ed85835737e0" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

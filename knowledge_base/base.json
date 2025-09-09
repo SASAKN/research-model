@@ -1,0 +1,58 @@
+{
+  "knowledge_base": {
+    "generalized_knowledge": [
+      {
+        "id": "gen_001",
+        "principle": "forall(x, is_human(x) -> is_mortal(x))",
+        "domain": "biology",
+        "confidence": 0.99,
+        "source": "verified_by_reasoning_engine"
+      }
+    ],
+    "knowledge_graph": {
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "Socrates",
+          "type": "person",
+          "attributes": {
+            "birth_year": -470,
+            "death_year": -399
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "human",
+          "type": "species",
+          "attributes": {}
+        }
+      ],
+      "relations": [
+        {
+          "id": "rel_001",
+          "subject_id": "entity_001",
+          "predicate": "is_a",
+          "object_id": "entity_002",
+          "confidence": 1.0
+        }
+      ]
+    },
+    "reasoning_patterns": [
+      {
+        "id": "pattern_001",
+        "problem_type": "causal_analysis",
+        "strategy": "Plan(search(x, is_cause_of(x, target_event))) & Verify(analyze_data(x))",
+        "success_rate": 0.85,
+        "last_updated": "2025-08-15"
+      }
+    ],
+    "response_templates": [
+      {
+        "id": "res_001",
+        "intent": "explaining_cause",
+        "text": "The primary cause of {{event}} appears to be {{cause}}, as supported by {{evidence}}.",
+        "variables": ["event", "cause", "evidence"]
+      }
+    ]
+  }
+}

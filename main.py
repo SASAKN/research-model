@@ -1,1 +1,0 @@
-# 探究でつくるReasoning Models

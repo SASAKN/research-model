@@ -1,0 +1,14 @@
+{
+    "plan": {
+        "entries": [
+            {
+                "explanation": {"action" : "", "reasons" : "", "evidence" : ""},
+                "program": {"action" : "", "reasons" : "", "evidence" : ""}
+            },
+            {
+                "explanation": {},
+                "program": {}
+            }
+        ]
+    }
+}
