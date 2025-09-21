@@ -1,0 +1,9 @@
+{
+    "functions" : [
+        {"id" : 0, "type" : "general_language", "contents" : "Means(a, b)", "num_of_args" : 2, "meaning_text" : "Means(a, b) means that a equals b ", "explanation_text" : "a means b"}
+    ],
+    "knowledges" : [
+        {"id" : 0, "type" : "tips", "contents" : "In user context, Koyamadai means Koyamadai High School", "evidence_text" : "user_context", "evidence_figure" : "Means('Koyamadai', 'Koyamadai High School')"},
+        {"id" : 1, "type" : "graph_relation", "contents" : ["知識グラフの中身配列になっている"], "evidence_text" : "Self-study and Online searching"}
+    ]
+}
