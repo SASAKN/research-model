@@ -88,14 +88,3 @@ class KnowledgeBase:
                  if keyword is None or keyword in str(item.get("contents", "")):
                     results.append(item)
         return results
-        
-
-if __name__ == "__main__":
-    kb = KnowledgeBase("sample_knowledge_base.json")
-
-    # Knowledge Example
-    # knowledge = KnowledgeParser(kb.get(0, "knowledges"))
-    # kb.add({"id" : kb.calc_next_id("knowledges"), "type" : "graph_relation2", "contents" : ["知識グラフの中身配列になっている"], "evidence_text" : "Self-study and Online searching"}, "knowledges")
-
-    kb.search(type="knowledges", keyword="知識グラフ")
-    print(kb.search(keyword="知識グラフ"))

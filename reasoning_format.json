@@ -1,0 +1,36 @@
+{
+    "goal": "Creating a fundamental of OS",
+    "process": [
+        {
+            "task": "Creating UEFI BootLoader",
+            "description": "Write a bootloader compatible with UEFI firmware",
+            "process": [
+                {
+                    "task": "Coding a UEFI Application",
+                    "estimated_time": "2 days",
+                    "process": []
+                },
+                {
+                    "task": "Coding a basic ELF loader",
+                    "estimated_time": "3 days",
+                    "process": []
+                }
+            ]
+        },{
+            "task": "Creating Hardware Abstraction Layer",
+            "description": "To abstract hardware, ",
+            "process": [
+                {
+                    "task": "Coding a UEFI Application",
+                    "estimated_time": "2 days",
+                    "process": []
+                },
+                {
+                    "task": "Coding a basic ELF loader",
+                    "estimated_time": "3 days",
+                    "process": []
+                }
+            ]
+        }
+    ]
+}
