@@ -6,7 +6,8 @@ import json
 
 def turn_into_json(prompt):
     cleaned = re.sub(r"^```json\s*|\s*```$", "", prompt.strip())
-    return json.loads(cleaned)
+    cleaned = cleaned.replace("'", '"')
+    return json.loads(cleaned) 
 
 
 if __name__ == "__main__":
