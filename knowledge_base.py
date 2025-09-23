@@ -53,37 +53,49 @@ class KnowledgeBase:
 
     def load_knowledge_base(self):
         try:
-            with open(self.filepath, 'r') as file:
+            with open(self.filepath, 'r', encoding="utf-8") as file:
                 return json.load(file)
         except FileNotFoundError:
             return {}
         
     def save_knowledge_base(self):
-        with open(self.filepath, 'w') as file:
-            json.dump(self.data, file, indent=4)
+        with open(self.filepath, 'w', encoding="utf-8") as file:
+            json.dump(self.data, file,ensure_ascii=False, indent=4)
+        
+    def calc_next_id(self, type):
+        if type not in self.data or not self.data[type]:
+            return 0
+        return max(item["id"] for item in self.data[type]) + 1
+
+    def add(self, item, type):
+        if type not in self.data:
+            self.data[type] = []
+        self.data[type].append(item)
+        self.save_knowledge_base()
     
     def get(self, id, type):
         for item in self.data.get(type, []):
             if item.get("id") == id:
                 return item
         return None
+    
+    def search(self, type=None, keyword=None):
+        results = []
+        types_to_search = [type] if type else self.data.keys()
+
+        for t in types_to_search:
+            for item in self.data.get(t, []):
+                 if keyword is None or keyword in str(item.get("contents", "")):
+                    results.append(item)
+        return results
         
 
 if __name__ == "__main__":
     kb = KnowledgeBase("sample_knowledge_base.json")
 
     # Knowledge Example
-    knowledge = KnowledgeParser(kb.get(0, "knowledges"))
-    print(knowledge.get_contents())
-    print(knowledge.get_type())
-    print(knowledge.get_evidence_text())
-    print(knowledge.get_evidence_figure())
+    # knowledge = KnowledgeParser(kb.get(0, "knowledges"))
+    # kb.add({"id" : kb.calc_next_id("knowledges"), "type" : "graph_relation2", "contents" : ["知識グラフの中身配列になっている"], "evidence_text" : "Self-study and Online searching"}, "knowledges")
 
-    # Function Example
-    function = FunctionParser(kb.get(0, "functions"))
-    print(function.get_contents())
-    print(function.get_type())
-    print(function.get_num_of_args())
-    print(function.get_meaning_text())
-    print(function.get_explanation_text())
-    
+    kb.search(type="knowledges", keyword="知識グラフ")
+    print(kb.search(keyword="知識グラフ"))
